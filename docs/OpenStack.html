@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3. Install OpenStack &mdash; Deploying Cloud Foundry on Private Cloud 1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. Install BOSH" href="BOSH.html" />
+    <link rel="prev" title="2. Install Juju" href="Juju.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Deploying Cloud Foundry on Private Cloud
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="MAAS.html">1. Install MAAS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Juju.html">2. Install Juju</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Install OpenStack</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#deploy-the-juju-controller">3.1. Deploy the Juju controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deploy-openstack">3.2. Deploy OpenStack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-openstack">3.3. Test OpenStack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">3.4. Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="BOSH.html">4. Install BOSH</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Deploying Cloud Foundry on Private Cloud</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>3. Install OpenStack</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/OpenStack.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="install-openstack">
+<span id="id1"></span><h1>3. Install OpenStack<a class="headerlink" href="#install-openstack" title="Permalink to this headline">¶</a></h1>
+<p>Now that we’ve installed and configured MAAS and successfully deployed a Juju controller, it’s time to do some real work; use Juju to deploy <a class="reference external" href="https://www.openstack.org">OpenStack</a>, the leading open cloud platform.</p>
+<p>We have two options when installing OpenStack:</p>
+<ol class="arabic simple">
+<li>Install and configure each OpenStack component separately. Adding Ceph, Compute, Swift, RabbitMQ, Keystone and Neutron in this way allows you to see exactly what Juju and MAAS are doing, and consequently, gives you a better understanding of the underlying OpenStack deployment.</li>
+<li>Use a <a class="reference external" href="https://docs.jujucharms.com/2.4/en/charms-bundles">bundle</a> to deploy OpenStack with a single command. A bundle is an encapsulation of a working deployment, including all configuration, resources and references. It allows you to effortlessly recreate a deployment with a single command or share that deployment with other Juju users.</li>
+</ol>
+<p>If this is your first foray into MAAS, Juju and OpenStack territory, we’d recommend starting with the first option. This will give you a stronger foundation for maintaining and expanding the default deployment. Our instructions for this option continue below.
+Alternatively, jump to <a class="reference external" href="https://docs.openstack.org/project-deploy-guide/charm-deployment-guide/rocky/install-openstack-bundle.html">Deploying OpenStack as a bundle</a> to learn about deploying as a bundle.</p>
+<div class="section" id="deploy-the-juju-controller">
+<span id="openstack-juju-controller"></span><h2>3.1. Deploy the Juju controller<a class="headerlink" href="#deploy-the-juju-controller" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="Juju.html#install-juju"><span class="std std-ref">Previously</span></a>, we tested our MAAS and Juju configuration by deploying a new Juju controller called <strong>maas-controller</strong>. You can check this controller is still operational by typing <strong>juju status</strong>. With the Juju controller running, the output will look similar to the following:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span>    <span class="n">Controller</span>           <span class="n">Cloud</span><span class="o">/</span><span class="n">Region</span>  <span class="n">Version</span>
+<span class="n">default</span>  <span class="n">maas</span><span class="o">-</span><span class="n">controller</span><span class="o">-</span><span class="n">two</span>  <span class="n">mymaas</span>        <span class="mf">2.2</span><span class="o">.</span><span class="mi">1</span>
+
+<span class="n">App</span>  <span class="n">Version</span>  <span class="n">Status</span>  <span class="n">Scale</span>  <span class="n">Charm</span>  <span class="n">Store</span>  <span class="n">Rev</span>  <span class="n">OS</span>  <span class="n">Notes</span>
+
+<span class="n">Unit</span>  <span class="n">Workload</span>  <span class="n">Agent</span>  <span class="n">Machine</span>  <span class="n">Public</span> <span class="n">address</span>  <span class="n">Ports</span>  <span class="n">Message</span>
+
+<span class="n">Machine</span>  <span class="n">State</span>  <span class="n">DNS</span>  <span class="n">Inst</span> <span class="nb">id</span>  <span class="n">Series</span>  <span class="n">AZ</span>
+</pre></div>
+</div>
+<p>If you need to remove and redeploy the controller, use the following two commands:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">juju</span> <span class="n">kill</span><span class="o">-</span><span class="n">controller</span> <span class="n">maas</span><span class="o">-</span><span class="n">controller</span>
+<span class="n">juju</span> <span class="n">bootstrap</span> <span class="o">--</span><span class="n">constraints</span> <span class="n">tags</span><span class="o">=</span><span class="n">juju</span> <span class="n">mymaas</span> <span class="n">maas</span><span class="o">-</span><span class="n">controller</span>
+</pre></div>
+</div>
+<p>During the bootstrap process, Juju will create a model called <strong>default</strong>, as shown in the output from <strong>juju status</strong> above. <a class="reference external" href="https://docs.jujucharms.com/2.4/en/models">Models</a> act as containers for applications, and Juju’s default model is great for experimentation.</p>
+<p>We are going to create a new model called <strong>uos</strong> to hold our OpenStack deployment exclusively, making the entire deployment easier to manage and maintain.</p>
+<p>To create a model called <strong>uos</strong> (and switch to it), simply type the following:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">juju</span> <span class="n">add</span><span class="o">-</span><span class="n">model</span> <span class="n">uos</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="deploy-openstack">
+<span id="openstack-deploy"></span><h2>3.2. Deploy OpenStack<a class="headerlink" href="#deploy-openstack" title="Permalink to this headline">¶</a></h2>
+<p>We are now going to step through adding the OpenStack components to the new model. The applications will be installed from the <a class="reference external" href="https://github.com/eniware-org/eniware-cloud">eniware-org/eniware-cloud repository</a>. We’ll be providing the configuration for the charms as a <strong>yaml</strong> file which we include as we deploy it.
+The configuration is held in the file called <strong>open-stack-2018-02-15.yaml</strong>.
+Deployment requires no further configuration than running the following command:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">juju</span> <span class="n">deploy</span> <span class="nb">open</span><span class="o">-</span><span class="n">stack</span><span class="o">-</span><span class="mi">2018</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">15</span>
+</pre></div>
+</div>
+<p>The deployed <strong>yaml</strong> file includes the following applications:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><ul class="first last simple">
+<li><a class="reference external" href="https://jujucharms.com/openstack-dashboard/">Openstack dashboard</a> - it provides a Django based web interface for use by both administrators and users of an OpenStack Cloud. It allows you to manage Nova, Glance, Cinder and Neutron resources within the cloud.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><ul class="first last simple">
+<li><a class="reference external" href="https://jujucharms.com/keystone/">Keystone</a> - this charm provides Keystone, the OpenStack identity service. Its target platform is (ideally) Ubuntu LTS + OpenStack.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><ul class="first last simple">
+<li><a class="reference external" href="https://jujucharms.com/glance/">Glance</a> - The Glance project provides an image registration and discovery service and an image delivery service. These services are used in conjunction by <strong>Nova</strong> to deliver images from object stores, such as OpenStack’s Swift service, to Nova’s compute nodes.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><ul class="first last simple">
+<li><a class="reference external" href="https://jujucharms.com/percona-cluster/">MySQL</a> - Percona XtraDB Cluster is a high availability and high scalability solution for MySQL clustering. Percona XtraDB Cluster integrates Percona Server with the Galera library of MySQL high availability solutions in a single product package which enables you to create a cost-effective MySQL cluster. This charm deploys Percona XtraDB Cluster onto Ubuntu.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><ul class="first last simple">
+<li><a class="reference external" href="https://jujucharms.com/cinder/">Cinder</a> - Cinder is the block storage service for the OpenStack. This charm provides the Cinder volume service for OpenStack. It is intended to be used alongside the other OpenStack components. Cinder is made up of 3 separate services: an API service, a scheduler and a volume service. This charm allows them to be deployed in different combination, depending on user preference and requirements.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><ul class="first last simple">
+<li><a class="reference external" href="https://jujucharms.com/cinder-ceph/">Cinder Ceph</a> - This charm provides a Ceph storage backend for <strong>Cinder</strong> charm. This allows multiple Ceph storage clusters to be associated with a single Cinder deployment, potentially alongside other storage backends from other vendors.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><ul class="first last simple">
+<li><a class="reference external" href="https://jujucharms.com/rabbitmq-server/">RabbitMQ</a> - RabbitMQ is an implementation of AMQP, the emerging standard for high performance enterprise messaging. The RabbitMQ server is a robust and scalable implementation of an AMQP broker. This charm deploys RabbitMQ server and provides AMQP connectivity to clients.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><ul class="first last simple">
+<li><a class="reference external" href="https://jujucharms.com/nova-compute/">Nova Compute</a> - this charm is a cloud computing fabric controller which provides the OpenStack compute service. This charm provides the Nova Compute hypervisor service and should be deployed directly to physical servers. Its target platform is Ubuntu (preferably LTS) + OpenStack.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><ul class="first last simple">
+<li><a class="reference external" href="https://jujucharms.com/ceph-osd/">Ceph OSD</a> - Ceph is a distributed storage and network file system designed to provide excellent performance, reliability, and scalability. This charm deploys additional Ceph OSD storage service units and should be used in conjunction with the <strong>Ceph-mon</strong> charm to scale out the amount of storage available in a Ceph cluster.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><ul class="first last simple">
+<li><a class="reference external" href="https://jujucharms.com/ceph-mon/">Ceph Mon</a> - This charm deploys a Ceph monitor cluster.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><ul class="first last simple">
+<li><a class="reference external" href="https://jujucharms.com/ceph-radosgw/">Ceph Radosgw</a> - This charm provides the RADOS HTTP gateway supporting S3 and Swift protocols for object storage.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><ul class="first last simple">
+<li><a class="reference external" href="https://jujucharms.com/neutron-api/">Neutron API</a> - Neutron is a virtual network service for OpenStack. Neutron provides an API to dynamically request and configure virtual networks. These networks connect “interfaces” from other OpenStack services (e.g., virtual NICs from Nova VMs). The Neutron API supports extensions to provide advanced network capabilities (e.g., QoS, ACLs, network monitoring, etc.). This principle charm provides the OpenStack Neutron API service which was previously provided by the <strong>Nova-cloud-controller</strong> charm. When this charm is related to the Nova-cloud-controller charm the Nova-cloud controller charm will shutdown its api service, de-register it from Keystone and inform the compute nodes of the new Neutron url.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><ul class="first last simple">
+<li><a class="reference external" href="https://jujucharms.com/nova-cloud-controller/">Nova Cloud Controller</a> - OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. This charm provides the cloud controller service for OpenStack Nova and includes <strong>nova-scheduler</strong>, <strong>nova-api</strong> and <strong>nova-conductor</strong> services.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><ul class="first last simple">
+<li><a class="reference external" href="https://jujucharms.com/neutron-openvswitch/">Neutron OpenvSwitch</a> - This charm provides the OpenStack Neutron Open vSwitch agent, managing L2 connectivity on <strong>nova-compute</strong> services. This subordinate charm provides the Neutron OpenvSwitch configuration for a compute node. Once deployed it takes over the management of the Neutron base and plugin configuration on the compute node.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><ul class="first last simple">
+<li><a class="reference external" href="https://jujucharms.com/neutron-gateway">Neutron Gateway</a> - This charm provides central <strong>Neutron networking</strong> services as part of a Neutron based OpenStack deployment.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><ul class="first last simple">
+<li><a class="reference external" href="https://jujucharms.com/ntp/">NTP</a> - NTP, the Network Time Protocol, provides network based time services to ensure synchronization of time across computers. This charm can be deployed alongside principal charms to enable NTP management across deployed services.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Remember, you can check on the status of a deployment using the <code class="docutils literal notranslate"><span class="pre">juju</span> <span class="pre">status</span></code> command. To see the status of a single charm of application, append the charm name. For example, for a Ceph OSD charm:</p>
+<div class="code last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">juju</span> <span class="n">status</span> <span class="n">ceph</span><span class="o">-</span><span class="n">osd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="test-openstack">
+<span id="openstack-test"></span><h2>3.3. Test OpenStack<a class="headerlink" href="#test-openstack" title="Permalink to this headline">¶</a></h2>
+<p>After everything has deployed and the output of <strong>juju status</strong> settles, you can check to make sure OpenStack is working by logging into the Horizon dashboard.</p>
+<p>The quickest way to get the IP address for the dashboard is with the following command:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">juju</span> <span class="n">status</span> <span class="o">--</span><span class="nb">format</span><span class="o">=</span><span class="n">yaml</span> <span class="n">openstack</span><span class="o">-</span><span class="n">dashboard</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">public</span><span class="o">-</span><span class="n">address</span> <span class="o">|</span> <span class="n">awk</span> <span class="s1">&#39;{print $2}&#39;</span>
+</pre></div>
+</div>
+<p>The URL will be <strong>http://&lt;IP ADDRESS&gt;/horizon</strong>. When you enter this into your browser you can login with <code class="docutils literal notranslate"><span class="pre">admin</span></code> and <code class="docutils literal notranslate"><span class="pre">openstack</span></code>, unless you changed the password in the configuration file.</p>
+<p>If everything works, you will see something similar to the following:</p>
+<div class="figure" id="install-openstack-horizon">
+<img alt="Horizon dashboard" src="_images/3-install-openstack_horizon.png" />
+</div>
+</div>
+<div class="section" id="next-steps">
+<h2>3.4. Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>Congratulations, you’ve successfully deployed a working OpenStack environment using both Juju and MAAS. The next step is to configure OpenStack for use within a production environment.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="BOSH.html" class="btn btn-neutral float-right" title="4. Install BOSH" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Juju.html" class="btn btn-neutral" title="2. Install Juju" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, EniWARE.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
