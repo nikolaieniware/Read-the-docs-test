@@ -30,7 +30,7 @@ The minimum requirements for the machines that run MAAS vary widely depending on
 The hardware that will be used for the purpose of this documentation is based on the following specifications:
 
 * 1 x MAAS Rack with Region controller: 8GB RAM, 2 CPUs, 2 NIC, 40GB storage
-* 
+
 
 Your hardware could differ considerably from the above and both MAAS and Juju will easily adapt. The Juju node could operate perfectly adequately with half the RAM (this would need to be defined as a bootstrap constraint) and adding more nodes will obviously improve performance.
 
@@ -43,7 +43,7 @@ Your hardware could differ considerably from the above and both MAAS and Juju wi
 1.2. Installation
 ------------------
 
-First, you need to have fresh install of `Ubuntu Server 16.04 TLS <http://releases.ubuntu.com/16.04/>`_ on the machine that will be hosting both the MAAS Rack and Region Controllers.
+First, you need to have fresh install of `Ubuntu Server 18.04 TLS <http://releases.ubuntu.com/18.04/>`_ on the machine that will be hosting both the MAAS Rack and Region Controllers.
 
 The configuration of the network is depends on your own infrastructure (see the `Ubuntu Server Network Configuration <https://help.ubuntu.com/lts/serverguide/network-configuration.html>`_ documentation for further details on modifying your network configuration). 
 
@@ -86,7 +86,7 @@ Now you sign in with the login credentials, and the web interface will launch th
 There are two steps left necessary for MAAS to get up and running. Unless you have specific requirements, most of these options can be left at their default values:
 
 * Connectivity: important services that default to being outside of your network. These include package archives and the DNS forwarder.
-* Ubuntu: for deployed nodes, MAAS needs to import the versions and image architectures. Specify 16.04 LTS as well as 14.04 LTS to add additional image.
+* Ubuntu: for deployed nodes, MAAS needs to import the versions and image architectures. Specify 18.04 LTS as well as 16.04 LTS to add additional image.
 
 .. _install-maas-images:
 
