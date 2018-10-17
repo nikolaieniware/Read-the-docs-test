@@ -29,9 +29,8 @@ The minimum requirements for the machines that run MAAS vary widely depending on
 
 The hardware that will be used for the purpose of this documentation is based on the following specifications:
 
-* 1 x MAAS Rack with Region controller: 8GB RAM, 2 CPUs, 1 NIC, 40GB storage
-* 1 x Juju node: 4GB RAM, 2 CPUs, 1 NIC, 40GB storage
-* 4 x OpenStack cloud nodes: 8GB RAM, 2 CPUs, 2 NICs, 80GB storage
+* 1 x MAAS Rack with Region controller: 8GB RAM, 2 CPUs, 2 NIC, 40GB storage
+* 
 
 Your hardware could differ considerably from the above and both MAAS and Juju will easily adapt. The Juju node could operate perfectly adequately with half the RAM (this would need to be defined as a bootstrap constraint) and adding more nodes will obviously improve performance.
 
