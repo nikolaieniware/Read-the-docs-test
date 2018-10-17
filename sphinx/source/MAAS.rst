@@ -170,6 +170,14 @@ The **Images** page allows you to download new images, use a custom source for i
 1.8. Adding nodes
 -------------------
 
+
+
+
+
+
+
+
+
 MAAS is now ready to accept new nodes. To do this, first ensure your four cloud nodes and single Juju node are set to boot from a PXE image. Now simply power them on. MAAS will add these new nodes automatically by taking the following steps:
 
 * Detect each new node on the network
