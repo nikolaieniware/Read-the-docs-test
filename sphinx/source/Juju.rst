@@ -144,7 +144,7 @@ The output to a successful bootstrap will look similar to the following:
 	Controller machines are in the "controller" model.
 	Initial model "default" added.
 
-If you’re monitoring the nodes view of the MAAS web UI, you will notice that the node we tagged with **juju** starts deploying Ubuntu 16.04 LTS automatically, which will be used to host the Juju controller.
+If you’re monitoring the nodes view of the MAAS web UI, you will notice that the node we tagged with **juju** starts deploying Ubuntu 18.04 LTS automatically, which will be used to host the Juju controller.
 
 
 2.4. Next steps
