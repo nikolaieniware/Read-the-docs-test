@@ -162,10 +162,11 @@ You will see the username and password for log  in Juju which will be something 
     username: admin
     password: 1e4e614eee21b2e1355671300927ca52
     
+After you see the username and password copy and paste it in to web UI
     
 This should look something like that:
 
-.. figure:: /images/juju gui login.png
+.. figure:: /images/juju guilogin.png
    :alt: Juju log in page 
 
 
