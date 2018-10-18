@@ -41,7 +41,7 @@ To install Juju, enter the following in the terminal:
    sudo apt install software-properties-common
    
    
-* After the instalation is complete you can change the IP addres (if it nessesery).Go to */etc/netplan/* and rename the file  *01-netcfg.yaml* using *sudo nano* command, to stop DHCP use folloing settings :
+* After the instalation is complete you can change the IP addres (if it necesary). Go to*/etc/netplan/*and rename the file  *01-netcfg.yaml* using *sudo nano* command, to stop DHCP use folloing settings :
 
 .. code::
 
