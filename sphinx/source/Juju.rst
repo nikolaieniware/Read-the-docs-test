@@ -171,7 +171,7 @@ This should look something like that:
 
 
 .. figure:: /images/2-juju_guilogin.png
-   :alt: Juju Login Page 
+   :alt: Login Page
 
 
 
