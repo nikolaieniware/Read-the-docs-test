@@ -20,7 +20,10 @@ We are now going to install and configure the following two core components of J
 ---------------------------
 
 We’re going to start by installing the Juju client on a machine create in ESXI 6.5 with 4 GiB, 2 CPU's, and 40 GB Storage running Ubuntu 18.04 LTS (Bionic Beaver) with network access to the MAAS deployment. For other installation options, see `Getting started with Juju <https://docs.jujucharms.com/2.4/en/getting-started>`_.
+
 * When you install the OS do not forget to install Open SSH
+
+
 To install Juju, enter the following in the terminal:
 
 .. code::
