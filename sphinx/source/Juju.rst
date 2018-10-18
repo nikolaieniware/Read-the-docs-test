@@ -137,9 +137,9 @@ The output to a successful bootstrap will look similar to the following:
 	 - 7cm8tm (arch=amd64 mem=48G cores=24)
 	Fetching Juju GUI 2.14.0
 	Waiting for address
-	Attempting to connect to 192.168.40.106:22
+	Attempting to connect to 192.168.40.185:22
 	Bootstrap agent now started
-	Contacting Juju controller at 192.168.40.106 to verify accessibility...
+	Contacting Juju controller at 192.168.40.185 to verify accessibility...
 	Bootstrap complete, "maas-controller" controller now available.
 	Controller machines are in the "controller" model.
 	Initial model "default" added.
