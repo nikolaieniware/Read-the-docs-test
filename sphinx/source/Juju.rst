@@ -166,7 +166,7 @@ After you see the username and password copy and paste it in to web UI
     
 This should look something like that:
 
-.. figure:: /images/juju_guilogin.png
+.. figure:: /images/2-juju_guilogin.png
    :alt: Juju login page 
 
 
