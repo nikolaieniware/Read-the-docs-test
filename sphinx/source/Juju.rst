@@ -161,6 +161,12 @@ You will see the username and password for log  in Juju which will be something 
     Your login credential is:
     username: admin
     password: 1e4e614eee21b2e1355671300927ca52
+    
+    
+This should look something like that:
+
+.. figure:: /images/juju gui login.png
+   :alt: Juju log in page 
 
 
 
