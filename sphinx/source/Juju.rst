@@ -33,7 +33,7 @@ To install Juju, enter the following in the terminal:
     If you have problems to clone juju repository use command.
     
 
-..code::
+.. code::
 
    sudo apt install software-properties-common
 
