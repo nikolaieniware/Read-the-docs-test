@@ -25,7 +25,7 @@ To install Juju, enter the following in the terminal:
 
 .. code::
 	
-	sudo add-apt-repository -u ppa:juju/stable
+	sudo add-apt-repository -yu ppa:juju/stable
 	sudo apt install juju
 
 .. note::
@@ -36,6 +36,26 @@ To install Juju, enter the following in the terminal:
 .. code::
 
    sudo apt install software-properties-common
+   
+   
+* After the instalation is complete you can change the IP addres (if it nessesery).Go to */etc/netplan/* and rename the file  *01-netcfg.yaml* using *sudo nano* command, to stop DHCP use folloing settings :
+
+.. code::
+
+# This file describes the network interfaces available on your system
+# For more information, see netplan(5).
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens160:
+      dhcp4: no
+      addresses: [192.168.40.17/24]
+      gateway4: 192.168.40.1
+      nameservers:
+        addresses: [8.8.8.8,8.8.4.4]
+
+
 
 .. _juju-client:	
 	
@@ -108,14 +128,14 @@ The output to a successful bootstrap will look similar to the following:
 .. code::
 	
 	Creating Juju controller "maas-controller" on mymaas
-	Looking for packaged Juju agent version 2.2-alpha1 for amd64
+	Looking for packaged Juju agent version 2.4-alpha1 for amd64
 	Launching controller instance(s) on mymaas...
-	 - 7cm8tm (arch=amd64 mem=2G cores=2)
-	Fetching Juju GUI 2.4.4
+	 - 7cm8tm (arch=amd64 mem=48G cores=24)
+	Fetching Juju GUI 2.14.0
 	Waiting for address
-	Attempting to connect to 192.168.100.106:22
+	Attempting to connect to 192.168.40.106:22
 	Bootstrap agent now started
-	Contacting Juju controller at 192.168.100.106 to verify accessibility...
+	Contacting Juju controller at 192.168.40.106 to verify accessibility...
 	Bootstrap complete, "maas-controller" controller now available.
 	Controller machines are in the "controller" model.
 	Initial model "default" added.
