@@ -45,18 +45,18 @@ To install Juju, enter the following in the terminal:
 
 .. code::
 
-# This file describes the network interfaces available on your system
-# For more information, see netplan(5).
-network:
-  version: 2
-  renderer: networkd
-  ethernets:
+    # This file describes the network interfaces available on your system
+    # For more information, see netplan(5).
+    network:
+    version: 2
+    renderer: networkd
+    ethernets:
     ens160:
-      dhcp4: no
-      addresses: [192.168.40.17/24]
-      gateway4: 192.168.40.1
-      nameservers:
-        addresses: [8.8.8.8,8.8.4.4]
+    dhcp4: no
+    addresses: [192.168.40.17/24]
+    gateway4: 192.168.40.1
+    nameservers:
+    addresses: [8.8.8.8,8.8.4.4]
 
 
 
@@ -102,7 +102,7 @@ The **oauth1** credential value is the MAAS API key for the **admin** user. To r
 
 .. _install-juju-maaskey:
 
-.. figure:: /images/2-install-juju_maaskey.png
+.. figure:: /images/2-install-juju_maaskeynew.png
    :alt: MAAS API key
 
 
