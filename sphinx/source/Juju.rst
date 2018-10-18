@@ -170,7 +170,7 @@ This should look something like that:
 
 
 
-.. figure:: /images/gui.png
+.. figure:: /images/gui1.png
    :alt: Login Page
 
 
