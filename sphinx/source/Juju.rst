@@ -146,6 +146,23 @@ The output to a successful bootstrap will look similar to the following:
 
 If you’re monitoring the nodes view of the MAAS web UI, you will notice that the node we tagged with **juju** starts deploying Ubuntu 18.04 LTS automatically, which will be used to host the Juju controller.
 
+If you wanna use juju web UI type command:
+
+.. code::
+
+    juju gui
+
+You will see the username and password for log  in Juju which will be something like that:
+
+.. code::
+
+    GUI 2.14.0 for model "admin/default" is enabled at:
+    https://192.168.40.52:17070/gui/u/admin/default
+    Your login credential is:
+    username: admin
+    password: 1e4e614eee21b2e1355671300927ca52
+
+
 
 2.4. Next steps
 ----------------
