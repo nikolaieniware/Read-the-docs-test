@@ -29,10 +29,12 @@ To install Juju, enter the following in the terminal:
 	sudo apt install juju
 
 .. note::
+
     If you have problems to clone juju repository use command.
     
 
 ..code::
+
    sudo apt install software-properties-common
 
 .. _juju-client:	
