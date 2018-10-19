@@ -54,6 +54,8 @@ After you add a model you can browse the Web UI in Juju using command n your ter
 
 	juju gui
    
+ See in step 2 for command juju gui      (2.3)
+   
   
    
 .. _openstack-deploy:
