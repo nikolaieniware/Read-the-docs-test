@@ -26,7 +26,7 @@ Alternatively, jump to `Deploying OpenStack as a bundle <https://docs.openstack.
 	
 	Model    Controller       Cloud/Region  Version  SLA          Timestamp
    
-       default  maas-controller  mymaas        2.4.4    unsupported  15:04:54+03:00
+        default  maas-controller  mymaas        2.4.4    unsupported  15:04:54+03:00
 
 
 
