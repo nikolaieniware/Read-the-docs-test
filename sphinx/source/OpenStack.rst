@@ -168,7 +168,7 @@ koeto izglejda po sledniq nachin
   
   
 
-In the terminal you can see what juju doing now 
+
 	
 The deployed **yaml** file includes the following applications:
 
