@@ -1,7 +1,7 @@
 .. _install-openstack:
 
 3. Install OpenStack
-=====================
+====================
 
 Now that we’ve installed and configured MAAS and successfully deployed a Juju controller, it’s time to do some real work; use Juju to deploy `OpenStack <https://www.openstack.org>`_, the leading open cloud platform.
 
@@ -18,20 +18,16 @@ Alternatively, jump to `Deploying OpenStack as a bundle <https://docs.openstack.
 .. _openstack-juju-controller:
 
 3.1. Deploy the Juju controller
----------------------------------
+-------------------------------
 
 :ref:`Previously <install-juju>`, we tested our MAAS and Juju configuration by deploying a new Juju controller called **maas-controller**. You can check this controller is still operational by typing **juju status**. With the Juju controller running, the output will look similar to the following:
 
 .. code::
 	
-	Model    Controller           Cloud/Region  Version
-	default  maas-controller-two  mymaas        2.2.1
+	Model    Controller       Cloud/Region  Version  SLA          Timestamp
+   
+   default  maas-controller  mymaas        2.4.4    unsupported  15:04:54+03:00
 
-	App  Version  Status  Scale  Charm  Store  Rev  OS  Notes
-
-	Unit  Workload  Agent  Machine  Public address  Ports  Message
-
-	Machine  State  DNS  Inst id  Series  AZ
 
 
 If you need to remove and redeploy the controller, use the following two commands:
@@ -50,22 +46,33 @@ To create a model called **uos** (and switch to it), simply type the following:
 
 .. code::
 	
-	juju add-model uos
+	juju add-model test
 
-
-	
-.. _openstack-deploy:
-	
-3.2. Deploy OpenStack
------------------------
-
-We are now going to step through adding the OpenStack components to the new model. The applications will be installed from the `eniware-org/eniware-cloud repository <https://github.com/eniware-org/eniware-cloud>`_. We’ll be providing the configuration for the charms as a **yaml** file which we include as we deploy it.
-The configuration is held in the file called **open-stack-2018-02-15.yaml**.
-Deployment requires no further configuration than running the following command:
+After you add a model you can browse the Web UI in Juju using command n your terminal:
 
 .. code::
 
-	juju deploy open-stack-2018-02-15
+	juju gui
+   
+  
+   
+.. _openstack-deploy:
+	
+3.2. Deploy OpenStack
+---------------------
+
+We are now going to step through adding the OpenStack components to the new model. The applications will be installed from the `eniware-org/eniware-cloud repository <https://github.com/eniware-org/openstack-bundles>`_. We’ll be providing the configuration for the charms as a **yaml** file which we include as we deploy it.
+When you Clone the repository to your juju machine, go to folder --stable/openstack-base
+
+The configuration is held in the file called **bundle.yaml**.
+Deployment requires no further configuration than running the following command:
+
+.. note::
+   Do not use autocomplete with Tab button
+
+.. code::
+
+	juju deploy bundle.yaml
 
 	
 The deployed **yaml** file includes the following applications:
@@ -104,7 +111,7 @@ The deployed **yaml** file includes the following applications:
 .. _openstack-test:
 	
 3.3. Test OpenStack
------------------------
+-------------------
 
 After everything has deployed and the output of **juju status** settles, you can check to make sure OpenStack is working by logging into the Horizon dashboard.
 
@@ -125,6 +132,6 @@ If everything works, you will see something similar to the following:
    
 	
 3.4. Next steps
-----------------
+---------------
 
 Congratulations, you’ve successfully deployed a working OpenStack environment using both Juju and MAAS. The next step is to configure OpenStack for use within a production environment.
