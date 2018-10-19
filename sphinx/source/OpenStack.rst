@@ -71,7 +71,7 @@ After you add a model you can browse the Web UI in Juju using command in your te
  
  
    
- Tova izglejda po sledniq nachin 
+ Tova izglejda po sledniq nachin .
    
   
 .. figure::
