@@ -75,7 +75,13 @@ Deployment requires no further configuration than running the following command:
 .. code::
 
 	juju deploy bundle.yaml
+   
+You can see what Juju doing with command in terminal
 
+.. code::
+
+   watch juju status 
+   
 	
 The deployed **yaml** file includes the following applications:
 
