@@ -84,7 +84,7 @@ After you add a model you can browse the Web UI in Juju using command in your te
 ---------------------
 
 We are now going to step through adding the OpenStack components to the new model. The applications will be installed from the `eniware-org/openstack-bundles repository <https://github.com/eniware-org/openstack-bundles>`_. We’ll be providing the configuration for the charms as a **yaml** file which we include as we deploy it.
-When you Clone the repository to your juju machine, go to folder --stable/openstack-base
+When you Clone the repository to your juju machine, go to folder ``stable/openstack-base``
 
 The configuration is held in the file called **bundle.yaml**.
 Deployment requires no further configuration than running the following command:
